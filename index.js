@@ -1,12 +1,11 @@
-var EventEmitter = require('events').EventEmitter
-  , assert = require('assert')
+var EventEmitter = require('events').EventEmitter;
+var assert = require('assert');
+var vec3 = require('vec3');
 
-module.exports = init;
+module.exports = inject;
 
 // instantiated from init
-var vec3;
 var sideVecs;
-var materials;
 
 // block types allowed to be used as scaffolding
 var scaffoldBlockTypes = {
@@ -27,21 +26,17 @@ var fallingBlockTypes = {
   13: true, // gravel
 };
 
-function init(mineflayer) {
-  vec3 = mineflayer.vec3;
-  sideVecs = [
-    vec3(-1,  0,  0),
-    vec3( 1,  0,  0),
-    vec3( 0, -1,  0),
-    vec3( 0,  1,  0),
-    vec3( 0,  0, -1),
-    vec3( 0,  0,  1),
-  ];
-  materials = mineflayer.materials;
-  return inject;
-}
+var sideVecs = [
+  vec3(-1,  0,  0),
+  vec3( 1,  0,  0),
+  vec3( 0, -1,  0),
+  vec3( 0,  1,  0),
+  vec3( 0,  0, -1),
+  vec3( 0,  0,  1),
+];
 
 function inject(bot) {
+  var materials = require('minecraft-data')(bot.majorVersion).materials
   bot.scaffold = new EventEmitter();
   bot.scaffold.state = 'off';
   bot.scaffold.targetPoint = null;

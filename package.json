@@ -22,5 +22,9 @@
     "block"
   ],
   "author": "Andrew Kelley",
-  "license": "BSD"
+  "license": "BSD",
+  "dependencies": {
+    "minecraft-data": "^2.19.0",
+    "vec3": "^0.1.3"
+  }
 }
