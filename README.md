@@ -14,11 +14,10 @@ This plugin depends on
 
 ```js
 var mineflayer = require('mineflayer');
-var navigatePlugin = require('mineflayer-navigate')(mineflayer);
-var scaffoldPlugin = require('mineflayer-scaffold')(mineflayer);
+var navigatePlugin = require('mineflayer-navigate');
+var scaffoldPlugin = require('mineflayer-scaffold');
 var bot = mineflayer.createBot();
-navigatePlugin(bot);
-scaffoldPlugin(bot);
+bot.loadPlugins([navigatePlugin, scaffoldPlugin])
 bot.on('chat', function(username, message) {
   if (username === bot.username) return;
   var target = bot.players[username].entity;
